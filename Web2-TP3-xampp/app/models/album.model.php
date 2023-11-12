@@ -13,12 +13,10 @@ class AlbumModel extends Model {
                 $sql .= ' ' .$parametros['sort'];  
             }
         }
-        if(isset($parametros['decada'])){
-            $sql .= ' WHERE fecha BETWEEN '.substr($parametros['decada'], -2).' AND '.substr($parametros['decada'], -2) + 10;   
+        if(isset($parametros['perPage'])){
+            $sql .= ' LIMIT ' .$parametros["offset"]. ', ' .$parametros['perPage'];   
         
         }
-        var_dump($sql);
-        die;
         $query = $this->db->prepare($sql);
         $query->execute();
 
