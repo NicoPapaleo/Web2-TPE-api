@@ -15,6 +15,18 @@ class CancionesApiController extends ApiController {
         if(empty($params)){
             $parametros = [];
 
+            if(isset($_GET['perPage'])){
+                $perPage = (INT)$_GET['perPage'];
+            if(isset($_GET['page'])){
+                $page = (INT)$_GET['page'];
+                $offset = ($page - 1) * $perPage;
+            }else{
+                $offset = 0;
+            }
+            $parametros["perPage"] = $perPage;
+            $parametros["offset"] = $offset;
+            }
+
             if(isset($_GET['sort'])){
                 $parametros['sort'] = $_GET['sort'];
             }
