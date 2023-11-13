@@ -13,6 +13,7 @@ $router->addRoute('canciones',      'POST',     'CancionesApiController',   'add
 $router->addRoute('canciones/:ID',  'GET',      'CancionesApiController',   'getCanciones');
 $router->addRoute('canciones/:ID',  'DELETE',   'CancionesApiController',   'deleteCancion');
 $router->addRoute('canciones/:ID',  'PUT',      'CancionesApiController',   'updateCancion');
+$router->addRoute('canciones/:ID/:subrecurso',  'GET',      'CancionesApiController',   'getCanciones');
 
 $router->addRoute('albums',         'GET',      'AlbumApiController',       'get'   ); # TaskApiController->get($params)
 $router->addRoute('albums/:ID',     'GET',      'AlbumApiController',       'get'   );

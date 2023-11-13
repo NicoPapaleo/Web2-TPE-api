@@ -21,9 +21,6 @@ class CancionesApiController extends ApiController {
             if(isset($_GET['order'])){
                 $parametros['order'] = $_GET['order'];
             }
-            if(isset($_GET['duracion'])){
-                $parametros['duracion'] = $_GET['duracion'];
-            }
 
             $canciones = $this->model->getCanciones($parametros);
 

@@ -12,9 +12,6 @@ class CancionesModel extends Model{
                 $sql .= ' ' . $parametros['sort'];
             }
         }
-        if(isset($parametros['duracion'])){
-            $sql .= ' WHERE duracion = ' . $parametros['duracion'];
-        }
 
         $query = $this->db->prepare($sql);
         $query->execute();
@@ -22,14 +19,6 @@ class CancionesModel extends Model{
         $canciones = $query->fetchAll(PDO::FETCH_OBJ);
         return $canciones;
     }
-
-    // function getCanciones(){
-    //     $query = $this->db->prepare('SELECT a.*, b.nombre AS album_nombre FROM canciones a INNER JOIN albumes b ON a.Album_fk = b.id');
-    //     $query->execute();
-
-    //     $canciones = $query->fetchAll(PDO::FETCH_OBJ);
-    //     return $canciones;
-    // }
 
     function getCancion($id){
         $query = $this->db->prepare('SELECT a.*,b.nombre AS album_nombre FROM canciones a INNER JOIN albumes b ON a.Album_fk = b.id WHERE a.id = ?');
