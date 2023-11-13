@@ -17,6 +17,11 @@ class AlbumModel extends Model {
             $sql .= ' LIMIT ' .$parametros["offset"]. ', ' .$parametros['perPage'];   
         
         }
+        if(isset($parametros['filtrarAutor'])){
+            $sql .= ' WHERE autor = "'.$parametros["filtrarAutor"].'"';   
+
+        }
+
         $query = $this->db->prepare($sql);
         $query->execute();
 

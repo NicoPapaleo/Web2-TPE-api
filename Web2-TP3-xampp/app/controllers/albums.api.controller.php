@@ -33,8 +33,22 @@ class AlbumApiController extends ApiController {
                 $parametros['sort'] = $_GET['sort'];
             }
             if(isset($_GET['order'])){
-                $parametros['order'] = $_GET['order'];
+    
+                if($_GET['order'] == "nombre" || $_GET['order'] == "autor" || $_GET['order'] == "fecha"){
+                    $parametros['order'] = $_GET['order'];
+                }else{
+                    $this->view->response(
+                        'el album no contiene '.$_GET['order'].'.'
+                        , 404);
+                        return; 
+                    }
+                }
+            
+                    
+            if(isset($_GET['filtrarAutor'])){
+                $parametros['filtrarAutor'] = $_GET['filtrarAutor'];
             }
+
 
             $albums = $this->model->getAlbums($parametros);
 
