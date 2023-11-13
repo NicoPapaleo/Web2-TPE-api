@@ -3,7 +3,7 @@ require_once './app/models/model.php';
 
 class CancionesModel extends Model{
 
-    function getCanciones($parametros = []){
+    function getCanciones($parametros = null){
         $sql = 'SELECT * FROM canciones';
 
         if(isset($parametros['order'])){
@@ -11,6 +11,9 @@ class CancionesModel extends Model{
             if(isset($parametros['sort'])){
                 $sql .= ' ' . $parametros['sort'];
             }
+        }
+        if(isset($parametros['perPage'])){
+            $sql .= ' LIMIT ' .$parametros["offset"]. ', ' .$parametros['perPage'];   
         }
 
         $query = $this->db->prepare($sql);
