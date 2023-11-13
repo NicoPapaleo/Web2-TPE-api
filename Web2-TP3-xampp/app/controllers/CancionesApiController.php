@@ -54,21 +54,6 @@ class CancionesApiController extends ApiController {
         }
     }
 
-    // public function getCanciones($params = []){
-    //     if(empty($params)){
-    //         $canciones = $this->model->getCanciones();
-    //         return $this->view->response($canciones, 200);
-    //     }
-    //     else{
-    //         $cancion = $this->model->getCancion($params[":ID"]);
-    //         if(!empty($cancion)){
-    //             return $this->view->response($cancion, 200);
-    //         }
-    //         else{
-    //             $this->view->response(['msg' => 'La cancion buscada no existe'], 404);
-    //         }
-    //     }
-    // }
 
     public function deleteCancion($params = []){
         $id = $params[':ID'];
