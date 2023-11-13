@@ -15,11 +15,31 @@ class CancionesApiController extends ApiController {
         if(empty($params)){
             $parametros = [];
 
+            if(isset($_GET['perPage'])){
+                $perPage = (INT)$_GET['perPage'];
+            if(isset($_GET['page'])){
+                $page = (INT)$_GET['page'];
+                $offset = ($page - 1) * $perPage;
+            }else{
+                $offset = 0;
+            }
+            $parametros["perPage"] = $perPage;
+            $parametros["offset"] = $offset;
+            }
+
             if(isset($_GET['sort'])){
                 $parametros['sort'] = $_GET['sort'];
             }
             if(isset($_GET['order'])){
-                $parametros['order'] = $_GET['order'];
+    
+                if($_GET['order'] == "Nombre" || $_GET['order'] == "Duracion" || $_GET['order'] == "Album-Fk"){
+                    $parametros['order'] = $_GET['order'];
+                }else{
+                    $this->view->response(
+                        'La cancion no contiene '.$_GET['order'].'.'
+                        , 404);
+                        return; 
+                }
             }
 
             $canciones = $this->model->getCanciones($parametros);
@@ -49,11 +69,10 @@ class CancionesApiController extends ApiController {
                     $this->view->response($cancion, 200);
             }
             else {
-                $this->view->response('El album buscado no existe', 404);
+                $this->view->response('La cancion buscada no existe', 404);
             }
         }
     }
-
 
     public function deleteCancion($params = []){
         $id = $params[':ID'];
@@ -74,7 +93,14 @@ class CancionesApiController extends ApiController {
         $duracion = $body->Duracion;
         $album_fk = $body->Album_fk;
 
-        $id = $this->model->insertCancion($nombre, $duracion, $album_fk);
+        if (empty($nombre) || empty($duracion) || empty($album_fk)) {
+            $this->view->response("Complete los datos", 400);
+        }
+        else {
+            $id = $this->model->insertCancion($nombre, $duracion, $album_fk);
+            $cancion = $this->model->getCancion($id);
+            $this->view->response($cancion, 201);
+        }
 
         $this->view->response('La cancion fue agregada con el id=' . $id , 201);
     } 

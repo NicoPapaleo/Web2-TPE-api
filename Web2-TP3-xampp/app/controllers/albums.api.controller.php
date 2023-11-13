@@ -41,8 +41,8 @@ class AlbumApiController extends ApiController {
                         'el album no contiene '.$_GET['order'].'.'
                         , 404);
                         return; 
-                    }
                 }
+            }
             
                     
             if(isset($_GET['filtrarAutor'])){
