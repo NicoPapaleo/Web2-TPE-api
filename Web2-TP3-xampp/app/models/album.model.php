@@ -6,7 +6,10 @@ class AlbumModel extends Model {
     function getAlbums($parametros = null) {
 
         $sql = 'SELECT * FROM albumes';
-
+        
+        if(isset($parametros['filtrarAutor'])){
+            $sql .= ' WHERE autor = "'.$parametros["filtrarAutor"].'"';   
+        }
         if(isset($parametros['order'])){
             $sql .= ' ORDER BY ' .$parametros['order'];  
             if(isset($parametros['sort'])){
@@ -16,10 +19,6 @@ class AlbumModel extends Model {
         if(isset($parametros['perPage'])){
             $sql .= ' LIMIT ' .$parametros["offset"]. ', ' .$parametros['perPage'];   
         
-        }
-        if(isset($parametros['filtrarAutor'])){
-            $sql .= ' WHERE autor = "'.$parametros["filtrarAutor"].'"';   
-
         }
 
         $query = $this->db->prepare($sql);

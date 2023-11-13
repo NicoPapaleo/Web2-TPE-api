@@ -89,15 +89,16 @@ class CancionesApiController extends ApiController {
     public function addCancion($params = []){
         $body = $this->getData();
 
-        $nombre = $body->Nombre;
-        $duracion = $body->Duracion;
-        $album_fk = $body->Album_fk;
+        $Nombre = $body->Nombre;
+        $Duracion = $body->Duracion;
+        $Album_fk = $body->Album_fk;
 
-        if (empty($nombre) || empty($duracion) || empty($album_fk)) {
+        if (empty($Nombre) || empty($Duracion) || empty($Album_fk)) {
             $this->view->response("Complete los datos", 400);
+            return;
         }
         else {
-            $id = $this->model->insertCancion($nombre, $duracion, $album_fk);
+            $id = $this->model->insertCancion($Nombre, $Duracion, $Album_fk);
             $cancion = $this->model->getCancion($id);
             $this->view->response($cancion, 201);
         }

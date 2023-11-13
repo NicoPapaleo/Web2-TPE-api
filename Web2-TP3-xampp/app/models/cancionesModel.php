@@ -38,9 +38,9 @@ class CancionesModel extends Model{
         return $cancion;
     }
 
-    function insertCancion($nombre, $duracion, $Album_fk) {
+    function insertCancion($Nombre, $Duracion, $Album_fk) {
         $query = $this->db->prepare('INSERT INTO canciones (Nombre, Duracion, Album_fk) VALUES(?,?,?)');
-        $query->execute([$nombre, $duracion, $Album_fk]);
+        $query->execute([$Nombre, $Duracion, $Album_fk]);
 
         return $this->db->lastInsertId();
     }

@@ -34,7 +34,7 @@ class AlbumApiController extends ApiController {
             }
             if(isset($_GET['order'])){
     
-                if($_GET['order'] == "nombre" || $_GET['order'] == "autor" || $_GET['order'] == "fecha"){
+                if($_GET['order'] == "nombre" || $_GET['order'] == "autor" || $_GET['order'] == "fecha"||$_GET['order'] == "id"){
                     $parametros['order'] = $_GET['order'];
                 }else{
                     $this->view->response(

@@ -16,12 +16,10 @@ $router->addRoute('canciones/:ID',  'PUT',      'CancionesApiController',   'upd
 $router->addRoute('canciones/:ID/:subrecurso',  'GET',      'CancionesApiController',   'getCanciones');
 
 $router->addRoute('albums',         'GET',      'AlbumApiController',       'get'   ); # TaskApiController->get($params)
-$router->addRoute('albums/:ID',     'GET',      'AlbumApiController',       'get'   );
 $router->addRoute('albums',         'POST',     'AlbumApiController',       'create');
-$router->addRoute('albums/:ID',     'PUT',      'AlbumApiController',       'update');
+$router->addRoute('albums/:ID',     'GET',      'AlbumApiController',       'get'   );
 $router->addRoute('albums/:ID',     'DELETE',   'AlbumApiController',       'delete');
+$router->addRoute('albums/:ID',     'PUT',      'AlbumApiController',       'update');
 $router->addRoute('albums/:ID/:subrecurso', 'GET',    'AlbumApiController', 'get'   );
-
-$router->addRoute('user/token',     'GET',      'UserApiController',        'getToken'   ); # UserApiController->getToken()
 
 $router->route($_GET['resource'] , $_SERVER['REQUEST_METHOD']);
