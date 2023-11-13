@@ -16,16 +16,39 @@ class AlbumApiController extends ApiController {
         if (empty($params)){
             $parametros = [];
 
+            
+            if(isset($_GET['perPage'])){
+                $perPage = (INT)$_GET['perPage'];
+            if(isset($_GET['page'])){
+                $page = (INT)$_GET['page'];
+                $offset = ($page - 1) * $perPage;
+            }else{
+                $offset = 0;
+            }
+            $parametros["perPage"] = $perPage;
+            $parametros["offset"] = $offset;
+            }
+            
             if(isset($_GET['sort'])){
                 $parametros['sort'] = $_GET['sort'];
             }
             if(isset($_GET['order'])){
-                $parametros['order'] = $_GET['order'];
+    
+                if($_GET['order'] == "nombre" || $_GET['order'] == "autor" || $_GET['order'] == "fecha"){
+                    $parametros['order'] = $_GET['order'];
+                }else{
+                    $this->view->response(
+                        'el album no contiene '.$_GET['order'].'.'
+                        , 404);
+                        return; 
+                    }
+                }
+            
+                    
+            if(isset($_GET['filtrarAutor'])){
+                $parametros['filtrarAutor'] = $_GET['filtrarAutor'];
             }
 
-            if(isset($_GET['decada'])){
-                $parametros['decada'] = $_GET['decada'];
-            }
 
             $albums = $this->model->getAlbums($parametros);
 
